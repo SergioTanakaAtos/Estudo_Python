@@ -29,7 +29,6 @@ while True:
 
         if len(lista) == 0:
             print('Nada para listar')
-
         for i, valor in enumerate(lista):
             print(i, valor)
     else:
