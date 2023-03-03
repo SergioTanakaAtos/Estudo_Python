@@ -40,3 +40,4 @@ def lista_int(lista):
 
 for lista in lista_de_listas_de_inteiros:
     print(lista," -> ", lista_int(lista))
+    print()
