@@ -8,7 +8,9 @@ def criar_funcao(func):
         return resultado
     return interna
 
+@criar_funcao #syntax sugar 
 def inverte_str(string):
+    print(inverte_str.__name__)
     return string[::-1]
 
 def e_str(param):
@@ -16,5 +18,5 @@ def e_str(param):
         raise TypeError('param deve ser uma string')
 
 checando_parametro = criar_funcao(inverte_str)
-invertida = checando_parametro("1212121")
+invertida = checando_parametro("123")
 print(invertida)
