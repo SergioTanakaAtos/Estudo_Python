@@ -70,10 +70,10 @@ def salvar(tarefas, caminho):
 
 
 
-CAMINHO_ARQUIVO = 'exercicio10.json'
+CAMINHO_ARQUIVO = 'c:\\Users\\A899160\\projeto\\seccao4\\exercicio10.json'
 tarefas = ler([],CAMINHO_ARQUIVO)
 tarefas_refazer = []
-
+cmd = "clear"
 while True:
     print('Comandos: listar, desfazer e refazer')
     tarefa = input('Digite uma tarefa ou comando: ')
@@ -82,7 +82,7 @@ while True:
         'listar': lambda: listar(tarefas),
         'desfazer': lambda: desfazer(tarefas, tarefas_refazer),
         'refazer': lambda: refazer(tarefas, tarefas_refazer),
-        'clear': lambda: os.system('clear'),
+        'clear': lambda: os.system(cmd),
         'adicionar': lambda: adicionar(tarefa, tarefas),
     }
     comando = comandos.get(tarefa) if comandos.get(tarefa) is not None else \
