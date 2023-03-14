@@ -21,4 +21,4 @@ except MyError as error:
     exception_ = OtherError("A mensagem do meu outro erro")
     exception_.add_note("mais uma nota")
     exception_.__notes__ += error.__notes__.copy()
-    raise exception_ from error 
+    raise exception_ from error   

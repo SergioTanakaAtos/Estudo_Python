@@ -1,0 +1,11 @@
+"""
+O que o módulo faz
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaasssssssssssssssssssssssssssssssssssssssssssss
+s
+s
+ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
+adddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+
+"""
