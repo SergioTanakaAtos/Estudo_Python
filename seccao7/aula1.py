@@ -9,9 +9,8 @@
 #   -> show
 # -> exec
 
-
 import sys 
-#from PySide6.Qt3DCore import S
+from PySide6.QtCore import Slot
 from PySide6.QtWidgets import(QApplication , QPushButton, QWidget, QVBoxLayout,
                               QMainWindow) 
 
@@ -36,12 +35,19 @@ central_widget.setLayout(layout)
 layout.addWidget(botao)
 layout.addWidget(botao2)
 
+@Slot()
 def slot_exemple(status_bar):
-    status_bar.showMesage('meu slot foi exec')
+    def inner():
+        status_bar.showMesage('meu slot foi exec')
+    return inner
 
+@Slot()
 def outro_slot(checked):
-    print('esta marcado:', checked)
+    def inner():
+        print('esta marcado:', checked)
+    return inner
 
+@Slot()
 def terceiro_slot(action):
     def inner():
         outro_slot(action.isChecked())
