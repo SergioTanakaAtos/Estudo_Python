@@ -11,62 +11,66 @@
 
 import sys 
 from PySide6.QtCore import Slot
-from PySide6.QtWidgets import(QApplication , QPushButton, QWidget, QVBoxLayout,
-                              QMainWindow) 
+from PySide6.QtWidgets import(QApplication , QPushButton, QWidget,
+                              QMainWindow, QGridLayout) 
 
-app = QApplication(sys.argv)
-window = QMainWindow()
-central_widget = QWidget()
-window.setCentralWidget(central_widget)
-window.setWindowTitle('Minha janela bonita')
+class MyWindow(QMainWindow):
+    def __init__(self, parent= None):
+        super().__init__(parent)
+        
+        self.central_widget = QWidget()
 
-botao = QPushButton('Texto botão')
-botao.setStyleSheet('font-size:40px; color:green;')
-#botao.show() # adicionar o widget na hierarquia e exibe a janela 
+        self.window.setCentralWidget(self.entral_widget)
+        self.window.setWindowTitle('Minha janela bonita')
+
+        #BOTÃO
+        self.botao = self.make_button('Texto botão')
+        self.botao.clicked.connect(self.segunda_acao_marcada)
+
+        #botao.show() # adicionar o widget na hierarquia e exibe a janela 
 
 
-botao2 = QPushButton('bt2')
-botao2.setStyleSheet('font-size:40px; color:red;')
+        self.botao2 = self.make_button('bt2')
+        self.botao2.setStyleSheet('font-size:40px; color:red;')
 
 
-layout = QVBoxLayout()
-central_widget.setLayout(layout)
+        self.grid_layout = QGridLayout()
+        self.central_widget.setLayout(self.grid_layout)
 
-layout.addWidget(botao)
-layout.addWidget(botao2)
+        self.grid_layout.addWidget(self.botao)
+        self.grid_layout.addWidget(self.botao2)
 
-@Slot()
-def slot_exemple(status_bar):
-    def inner():
-        status_bar.showMesage('meu slot foi exec')
-    return inner
+        self.status_bar = self.statusBar()
+        self.status_bar.showMessage("Mostar barra")
 
-@Slot()
-def outro_slot(checked):
-    def inner():
-        print('esta marcado:', checked)
-    return inner
+        #menu bar 
+        self.menu = self.menuBar()
+        self.primeiro_menu = self.menu.addMenu('primeiro menu')
+        self.primeira_acao = self.primeiro_menu.addAction('primeira acao')
+        self.primeira_acao.triggered.connect(self.muda_mensagem_da_status_bar)
 
-@Slot()
-def terceiro_slot(action):
-    def inner():
-        outro_slot(action.isChecked())
-    return inner 
+
+        self.segunda_acao = self.primeiro_menu.addAction('segunda acao')
+        self.segunda_acao.setCheckable(True)
+        self.segunda_acao.toggled.connect(self.segunda_acao_marcada)
+        self.segunda_acao.hovered.connect(self.segunda_acao_marcada)
+
+    @Slot()
+    def muda_mensagem_da_status_bar(self):
+        self.status_bar.showMessage('O meu slot foi executado')
+
+    @Slot()
+    def segunda_acao_marcada(self):
+        print('Está marcado?', self.segunda_action.isChecked())
+
+    def make_button(self, text):
+        btn = QPushButton(text)
+        btn.setStyleSheet('font-size: 80px;')
+        return btn
 #status bar 
-status_bar = window.statusBar()
-status_bar.showMessage("Mostar barra")
 
-#menu bar 
-menu = window.menuBar()
-primeiro_menu = menu.addMenu('primeiro menu')
-primeira_acao = primeiro_menu.addAction('primeira acao')
-primeira_acao.triggered.connect(lambda: slot_exemple(status_bar))
-
-
-segunda_acao = primeiro_menu.addAction('segunda acao')
-segunda_acao.setCheckable(True)
-segunda_acao.toggled.connect(outro_slot)
-segunda_acao.hovered.connect(terceiro_slot(segunda_acao))
-
-window.show()
-app.exec() # loop da apliocação
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    window = MyWindow()
+    window.show()
+    app.exec() # loop da apliocação
