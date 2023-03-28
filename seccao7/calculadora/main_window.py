@@ -1,7 +1,7 @@
 from variables import WINDOW_ICON_PATH
 from PySide6.QtGui import QIcon
-from PySide6.QtWidgets import (QApplication,QMainWindow,QVBoxLayout,QWidget,
-                               QLabel)
+from PySide6.QtWidgets import QMessageBox,QMainWindow,QVBoxLayout,QWidget
+                               
 class MainWindow(QMainWindow):
     def __init__(self, parent: QWidget | None = None,*args,**kwargs) -> None:
         super().__init__(parent, *args, **kwargs)
@@ -25,4 +25,6 @@ class MainWindow(QMainWindow):
     
     def addWidgetToVLayout(self,widget:QWidget):
         self.vLayout.addWidget(widget)
-        
+    
+    def makeMsgBox(self):
+        return QMessageBox(self)
