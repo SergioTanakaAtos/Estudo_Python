@@ -10,6 +10,11 @@ connection = sqlite3.connect(DB_FILE)
 cursor = connection.cursor()
 
 cursor.execute(
+    f'DELETE FROM {TABLE_NAME}'
+)
+connection.commit()
+#criar tabela 
+cursor.execute(
     f'CREATE TABLE IF NOT EXISTS {TABLE_NAME}'
     '('
     'id INTEGER PRIMARY KEY AUTOINCREMENT,'
@@ -19,6 +24,12 @@ cursor.execute(
 )
 connection.commit()
 
-#SQL
+
+cursor.execute(
+    f'INSERT INTO {TABLE_NAME}(id, name , weight)'
+    'VALUES (NULL,"sergio",10.0),  (NULL,"Jennifer",4)'
+)
+connection.commit()
+
 cursor.close()
 connection.close()
